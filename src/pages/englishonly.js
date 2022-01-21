@@ -131,24 +131,12 @@ const IndexPage = () => {
   return (
     <StaticQuery
       query={graphql`
-        query getData {
-          strapi {
-            messages(locale: "all") {
-              data {
-                id
-                attributes {
-                  locale
-                  greeting
-                  localizations {
-                    data {
-                      id
-                      attributes {
-                        locale
-                        greeting
-                      }
-                    }
-                  }
-                }
+        query MyQuery {
+          strapiMessage {
+            data {
+              id
+              attributes {
+                greeting
               }
             }
           }
@@ -157,16 +145,17 @@ const IndexPage = () => {
       render={data => ( 
         <main style={pageStyles}>
         <title>Home Page</title>
+        {/* {data.allStrapiMessage.nodes.map((res, i) => (
+          <div style={headingStyles} key={i}>
+            <h1>{res.greeting}</h1>
+          </div>
+        ))} */}
         <h1 style={headingStyles}>
+          {/* Hi Gwen */}
           <br />
-          {data.strapi.messages.data.map((res, i) => (
+          {data.strapiMessage.data.map((res, i) => (
             <div key={i}>
-              {/* {res.attributes.locale == "ar" ? */}
-                {/* {res.attributes.greeting} */}
-                {/* : ""} */}
-                {res.attributes.locale == "ar" ?
-                res.attributes.greeting
-                : ""}
+              {res.attributes.greeting}
             </div>
           ))}
           <br/>
